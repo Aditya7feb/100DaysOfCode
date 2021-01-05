@@ -1,19 +1,24 @@
 import 'package:flutter/foundation.dart';
 
-class Product {
+class DummyData with ChangeNotifier {
   final String id;
   final String title;
   final String description;
   final double price;
-  final String imageUrl;
-  bool isFavorite;
+  final String imageURL;
+  bool isFavourite;
 
-  Product({
+  DummyData({
     @required this.id,
     @required this.title,
     @required this.description,
+    @required this.imageURL,
     @required this.price,
-    @required this.imageUrl,
-    this.isFavorite = false,
+    this.isFavourite = false,
   });
+
+  void setFavourite() {
+    isFavourite = !isFavourite;
+    notifyListeners();
+  }
 }

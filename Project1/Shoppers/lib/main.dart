@@ -1,28 +1,40 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import './screens/products_overview_screen.dart';
-import './screens/product_detail_screen.dart';
-import './providers/products.dart';
+import './screen/product_Detail.dart';
+import './screen/homepage.dart';
+import './provider/provider_dummy.dart';
+import './provider/cartData.dart';
+import './Screen/cart_screen.dart';
 
-void main() => runApp(MyApp());
+void main() {
+  runApp(MyApp());
+}
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
+  @override
+  _MyAppState createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider(
-      builder: (ctx) => Products(),
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider(
+          create: (ctx) => ProviderDummy(),
+        ),
+        ChangeNotifierProvider(
+          create: (ctx) => Cart(),
+        )
+      ],
       child: MaterialApp(
-          title: 'MyShop',
-          theme: ThemeData(
-            primarySwatch: Colors.purple,
-            accentColor: Colors.deepOrange,
-            fontFamily: 'Lato',
-          ),
-          home: ProductsOverviewScreen(),
-          routes: {
-            ProductDetailScreen.routeName: (ctx) => ProductDetailScreen(),
-          }),
+        home: Homepage(),
+        routes: {
+          ProductDetail.routeName: (ctx) => ProductDetail(),
+          CartScreen.routeName: (ctx) => CartScreen(),
+        },
+      ),
     );
   }
 }
