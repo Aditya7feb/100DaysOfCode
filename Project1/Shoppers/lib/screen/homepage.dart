@@ -6,6 +6,7 @@ import '../widget/appbarcolor.dart';
 import '../widget/badge.dart';
 import '../provider/cartData.dart';
 import '../screen/cart_screen.dart';
+import '../widget/app_drawer.dart';
 
 enum Favstat {
   TrueFav,
@@ -64,6 +65,7 @@ class _HomepageState extends State<Homepage> {
           )
         ],
       ),
+      drawer: AppDrawer(),
       body: GridBox(_showFavourites),
     );
   }

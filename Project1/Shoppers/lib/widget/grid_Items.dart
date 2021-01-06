@@ -4,7 +4,6 @@ import 'package:provider/provider.dart';
 import '../screen/product_Detail.dart';
 import '../provider/dummyData.dart';
 import '../provider/cartData.dart';
-import './badge.dart';
 
 class GridItem extends StatelessWidget {
   @override

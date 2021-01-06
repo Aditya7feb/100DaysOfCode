@@ -6,6 +6,8 @@ import './screen/homepage.dart';
 import './provider/provider_dummy.dart';
 import './provider/cartData.dart';
 import './Screen/cart_screen.dart';
+import './provider/orders.dart';
+import './Screen/orders_screen.dart';
 
 void main() {
   runApp(MyApp());
@@ -26,6 +28,9 @@ class _MyAppState extends State<MyApp> {
         ),
         ChangeNotifierProvider(
           create: (ctx) => Cart(),
+        ),
+        ChangeNotifierProvider(
+          create: (ctx) => Orders(),
         )
       ],
       child: MaterialApp(
@@ -33,6 +38,7 @@ class _MyAppState extends State<MyApp> {
         routes: {
           ProductDetail.routeName: (ctx) => ProductDetail(),
           CartScreen.routeName: (ctx) => CartScreen(),
+          OrdersScreen.routeName: (ctx) => OrdersScreen(),
         },
       ),
     );
