@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:shop/widget/appbarcolor.dart';
 
 class Badge extends StatelessWidget {
   const Badge({

@@ -62,6 +62,20 @@ class GridItem extends StatelessWidget {
             onPressed: () {
               cart.addItems(
                   loadedProduct.id, loadedProduct.price, loadedProduct.title);
+              Scaffold.of(context).hideCurrentSnackBar();
+              Scaffold.of(context).showSnackBar(
+                SnackBar(
+                  content: Text("Product Added to Cart.!"),
+                  duration: Duration(seconds: 1, milliseconds: 50),
+                  action: SnackBarAction(
+                    label: 'UNDO',
+                    textColor: Colors.yellow,
+                    onPressed: () {
+                      cart.removeSingleItem(loadedProduct.id);
+                    },
+                  ),
+                ),
+              );
             },
             color: Colors.amber,
           ),

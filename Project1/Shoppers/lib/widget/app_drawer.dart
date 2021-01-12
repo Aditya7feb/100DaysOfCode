@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+
 import 'package:shop/screen/orders_screen.dart';
 import 'package:shop/widget/appbarcolor.dart';
+import '../Screen/admin_screen.dart';
 
 class AppDrawer extends StatelessWidget {
   @override
@@ -9,7 +11,7 @@ class AppDrawer extends StatelessWidget {
       child: Column(
         children: <Widget>[
           AppBar(
-            flexibleSpace: AppBarColor(),
+            backgroundColor: Colors.green[300],
             title: Text('Hello'),
             automaticallyImplyLeading: false,
           ),
@@ -30,7 +32,17 @@ class AppDrawer extends StatelessWidget {
               Navigator.of(context)
                   .pushReplacementNamed(OrdersScreen.routeName);
             },
-          )
+          ),
+          ListTile(
+            leading: Icon(
+              Icons.admin_panel_settings,
+            ),
+            title: Text('admin'),
+            onTap: () {
+              Navigator.of(context)
+                  .pushReplacementNamed(UserProductsScreen.routeName);
+            },
+          ),
         ],
       ),
     );

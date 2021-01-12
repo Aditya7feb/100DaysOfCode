@@ -8,6 +8,8 @@ import './provider/cartData.dart';
 import './Screen/cart_screen.dart';
 import './provider/orders.dart';
 import './Screen/orders_screen.dart';
+import './Screen/admin_screen.dart';
+import './Screen/admin_edit_screen.dart';
 
 void main() {
   runApp(MyApp());
@@ -34,11 +36,14 @@ class _MyAppState extends State<MyApp> {
         )
       ],
       child: MaterialApp(
+        debugShowCheckedModeBanner: false,
         home: Homepage(),
         routes: {
           ProductDetail.routeName: (ctx) => ProductDetail(),
           CartScreen.routeName: (ctx) => CartScreen(),
           OrdersScreen.routeName: (ctx) => OrdersScreen(),
+          UserProductsScreen.routeName: (ctx) => UserProductsScreen(),
+          EditProductScreen.routeName: (ctx) => EditProductScreen(),
         },
       ),
     );

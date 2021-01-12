@@ -50,7 +50,7 @@ class _HomepageState extends State<Homepage> {
               PopupMenuItem(
                 child: Text("Show All"),
                 value: Favstat.FalseFav,
-              )
+              ),
             ],
           ),
           Consumer<Cart>(

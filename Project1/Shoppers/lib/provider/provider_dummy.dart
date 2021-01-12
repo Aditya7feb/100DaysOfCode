@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 import './dummyData.dart';
 
@@ -66,7 +67,30 @@ class ProviderDummy with ChangeNotifier {
   //   notifyListeners();
   // }
 
-  void addProducts() {
+  void addProducts(DummyData product) {
+    final newProduct = DummyData(
+      id: DateTime.now().toString(),
+      title: product.title,
+      description: product.description,
+      imageURL: product.imageURL,
+      price: product.price,
+    );
+    _providerDummy.add(newProduct);
+    notifyListeners();
+  }
+
+  void updateProducts(String id, DummyData newProduct) {
+    final prodIndex = _providerDummy.indexWhere((prod) => prod.id == id);
+    if (prodIndex >= 0) {
+      _providerDummy[prodIndex] = newProduct;
+      notifyListeners();
+    } else {
+      print('...');
+    }
+  }
+
+  void deleteProducts(String id) {
+    _providerDummy.removeWhere((element) => element.id == id);
     notifyListeners();
   }
 }
