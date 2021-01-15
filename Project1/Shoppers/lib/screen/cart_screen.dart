@@ -4,6 +4,7 @@ import 'package:provider/provider.dart';
 import '../provider/cartData.dart';
 import '../widget/cart_item.dart';
 import '../provider/orders.dart';
+import '../widget/appbarcolor.dart';
 
 class CartScreen extends StatelessWidget {
   static const routeName = '/CartScreen';
@@ -14,6 +15,7 @@ class CartScreen extends StatelessWidget {
     final order = Provider.of<Orders>(context, listen: false);
     return Scaffold(
       appBar: AppBar(
+        flexibleSpace: AppBarColor(),
         title: Text('Your Cart'),
       ),
       body: Column(
@@ -43,16 +45,7 @@ class CartScreen extends StatelessWidget {
                     ),
                     backgroundColor: Colors.blue[400],
                   ),
-                  FlatButton(
-                    child: Text('ORDER NOW'),
-                    onPressed: () {
-                      order.addOrder(
-                        cart.cartData.values.toList(),
-                        cart.totalAmount,
-                      );
-                      cart.clear();
-                    },
-                  ),
+                  OrderButton(cart: cart, order: order),
                 ],
               ),
             ),
@@ -72,6 +65,45 @@ class CartScreen extends StatelessWidget {
           )
         ],
       ),
+    );
+  }
+}
+
+class OrderButton extends StatefulWidget {
+  const OrderButton({
+    Key key,
+    @required this.cart,
+    @required this.order,
+  }) : super(key: key);
+
+  final Cart cart;
+  final Orders order;
+
+  @override
+  _OrderButtonState createState() => _OrderButtonState();
+}
+
+class _OrderButtonState extends State<OrderButton> {
+  var _isLoading = false;
+  @override
+  Widget build(BuildContext context) {
+    return FlatButton(
+      child: _isLoading ? CircularProgressIndicator() : Text('ORDER NOW'),
+      onPressed: (widget.cart.totalAmount <= 0 || _isLoading)
+          ? null
+          : () async {
+              setState(() {
+                _isLoading = true;
+              });
+              await Provider.of<Orders>(context, listen: false).addOrder(
+                widget.cart.cartData.values.toList(),
+                widget.cart.totalAmount,
+              );
+              setState(() {
+                _isLoading = false;
+              });
+              widget.cart.clear();
+            },
     );
   }
 }

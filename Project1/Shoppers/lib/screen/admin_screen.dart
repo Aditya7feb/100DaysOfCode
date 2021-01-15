@@ -9,6 +9,12 @@ import '../widget/appbarcolor.dart';
 
 class UserProductsScreen extends StatelessWidget {
   static const routeName = '/UserProductsScreen';
+
+  Future<void> _refreshProducts(BuildContext context) async {
+    await Provider.of<ProviderDummy>(context, listen: false)
+        .fetchAndSetProducts();
+  }
+
   @override
   Widget build(BuildContext context) {
     final prodDetail = Provider.of<ProviderDummy>(context);
@@ -26,21 +32,24 @@ class UserProductsScreen extends StatelessWidget {
         ],
       ),
       drawer: AppDrawer(),
-      body: Padding(
-        padding: EdgeInsets.all(8),
-        child: ListView.builder(
-          itemCount: prodDetail.providerDummy.length,
-          itemBuilder: (_, i) => Column(
-            children: <Widget>[
-              UserProductItem(
-                prodDetail.providerDummy[i].id,
-                prodDetail.providerDummy[i].title,
-                prodDetail.providerDummy[i].imageURL,
-              ),
-              Divider(
-                thickness: 0.5,
-              ),
-            ],
+      body: RefreshIndicator(
+        onRefresh: () => _refreshProducts(context),
+        child: Padding(
+          padding: EdgeInsets.all(8),
+          child: ListView.builder(
+            itemCount: prodDetail.providerDummy.length,
+            itemBuilder: (_, i) => Column(
+              children: <Widget>[
+                UserProductItem(
+                  prodDetail.providerDummy[i].id,
+                  prodDetail.providerDummy[i].title,
+                  prodDetail.providerDummy[i].imageURL,
+                ),
+                Divider(
+                  thickness: 0.5,
+                ),
+              ],
+            ),
           ),
         ),
       ),

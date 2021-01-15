@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'package:shop/screen/orders_screen.dart';
-import 'package:shop/widget/appbarcolor.dart';
+import '../screen/orders_screen.dart';
 import '../Screen/admin_screen.dart';
 
 class AppDrawer extends StatelessWidget {
